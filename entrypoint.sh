@@ -8,12 +8,12 @@ function main() {
   sanitize "${INPUT_USERNAME}" "username"
   sanitize "${INPUT_PASSWORD}" "password"
 
+  translateDockerTag
+  DOCKERNAME="${INPUT_NAME}:${TAG}"
+
   if uses "${INPUT_REGISTRY}" && ! isPartOfTheName; then
     INPUT_NAME="${INPUT_REGISTRY}/${INPUT_NAME}"
   fi
-
-  translateDockerTag
-  DOCKERNAME="${INPUT_NAME}:${TAG}"
 
   if uses "${INPUT_WORKDIR}"; then
     changeWorkingDirectory
