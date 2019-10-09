@@ -11,12 +11,12 @@ function main() {
   translateDockerTag
   DOCKERNAME="${INPUT_NAME}:${TAG}"
 
-  if uses "${INPUT_REGISTRY}" && ! isPartOfTheName; then
-    INPUT_NAME="${INPUT_REGISTRY}/${INPUT_NAME}"
-  fi
-
   if uses "${INPUT_WORKDIR}"; then
     changeWorkingDirectory
+  fi
+
+  if uses "${INPUT_REGISTRY}" && ! isPartOfTheName; then
+    INPUT_NAME="${INPUT_REGISTRY}/${INPUT_NAME}"
   fi
 
   echo ${INPUT_PASSWORD} | docker login -u ${INPUT_USERNAME} --password-stdin ${INPUT_REGISTRY}
